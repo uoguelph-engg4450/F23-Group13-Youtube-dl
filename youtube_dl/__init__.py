@@ -453,7 +453,7 @@ def _real_main(argv=None):
 
             ydl.warn_if_short_id(sys.argv[1:] if argv is None else argv)
             parser.error(
-                'You must provide at least one URL.\n'
+                'LEBRON LEBONR LEBORN\n'
                 'Type youtube-dl --help to see a list of all options.')
 
         try:
