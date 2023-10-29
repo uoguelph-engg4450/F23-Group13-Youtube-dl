@@ -394,7 +394,7 @@ class YoutubeDL(object):
 
         # (NEW) Used to append to an existing text file which will hold our links giving context in the first line.
         with open(file_name, 'a', encoding = "utf-8") as file:
-                file.write("All links in Playlist: \n\n")
+                file.write("All Links Stored In Playlist: \n\n")
         
         # END OF NEW       
         
@@ -985,6 +985,23 @@ class YoutubeDL(object):
             return ie_result
 
     def add_default_extra_info(self, ie_result, ie, url):
+        
+        # (NEW) This is part of the code that does the heavy lifting of the request so that all the links end up in the URL.
+        
+        #print("https://www.youtube.com/watch?v=" + url) # The URL contains the ID not the youtube link therefore you have to add the string earlier and add that to the text file.
+        
+        # IF there is no pretext in the URL then add the ID with it (this is done to aovid adding the playlist link)
+        
+        if must_not_have not in url:                                                                        
+            newURL_append = "https://www.youtube.com/watch?v=" + url + '\n'                                 # Following my statements above this makes senseh.
+            with open(file_name, 'a', encoding = "utf-8") as file:                                          # Append to existing text file.
+                file.write(newURL_append + '\n')                                                            # Write the URL for the current video URL.
+                            
+            file.close()                                                                                    # Close the file good practice.
+            print(f'A new file containing all the links in the playlist is in {file_name}')                 # Output a completion message to the console.
+            
+        # END OF NEW
+        
         self.add_extra_info(ie_result, {
             'extractor': ie.IE_NAME,
             'webpage_url': url,
@@ -2221,6 +2238,8 @@ class YoutubeDL(object):
                     raise MaxDownloadsReached()
 
     def download(self, url_list):
+        #print(url_list)                                                            # (NEW) got the output for the playlist URL not IDs so useless.
+
         """Download a given list of URLs."""
         outtmpl = self.params.get('outtmpl', DEFAULT_OUTTMPL)
         if (len(url_list) > 1
@@ -2357,6 +2376,7 @@ class YoutubeDL(object):
         if fn is None:
             return
         vid_id = self._make_archive_id(info_dict)
+        #print("Vid ID : " + vid_id)                                       # (NEW) used to check if this held ID but can't use or print.
         assert vid_id
         with locked_file(fn, 'a', encoding='utf-8') as archive_file:
             archive_file.write(vid_id + '\n')
