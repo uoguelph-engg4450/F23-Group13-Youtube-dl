@@ -23,6 +23,7 @@ import time
 import tokenize
 import traceback
 import random
+# import options.py          # (NEW) Just added although not required.
 
 try:
     from ssl import OPENSSL_VERSION
@@ -339,6 +340,16 @@ class YoutubeDL(object):
                         care about DASH.
     """
 
+    # (NEW) These are declarations used in the program
+    
+    global file_name                                        # Global file_name variable holds text file name.
+    file_name = "Youtube_Playlist_URLs_Output.txt"
+    
+    global must_not_have                                    # must_not_have used to store link to avoid adding playlist url into the text file as we have a sepearate one for that.
+    must_not_have = "https://www.youtube.com"
+    
+    # END OF NEW
+        
     _NUMERIC_FIELDS = set((
         'width', 'height', 'tbr', 'abr', 'asr', 'vbr', 'fps', 'filesize', 'filesize_approx',
         'timestamp', 'upload_year', 'upload_month', 'upload_day',
@@ -381,6 +392,12 @@ class YoutubeDL(object):
         self._header_cookies = []
         self._load_cookies_from_headers(self.params.get('http_headers'))
 
+        # (NEW) Used to append to an existing text file which will hold our links giving context in the first line.
+        with open(file_name, 'a', encoding = "utf-8") as file:
+                file.write("All links in Playlist: \n\n")
+        
+        # END OF NEW       
+        
         def check_deprecated(param, option, suggestion):
             if self.params.get(param) is not None:
                 self.report_warning(
