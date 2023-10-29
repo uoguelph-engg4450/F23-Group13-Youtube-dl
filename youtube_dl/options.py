@@ -867,6 +867,18 @@ def parseOpts(overrideArguments=None):
         metavar='FORMAT', dest='convertsubtitles', default=None,
         help='Convert the subtitles to other format (currently supported: srt|ass|vtt|lrc)')
 
+    # (NEW) WILL SOLVE ISSUE #2018
+    # General option to export a text file when given a new youtube playlist
+    
+    # Adding a new option to export a new textfile containing the URL of the playlist itself (This is technically an additional feature for the request)
+    
+    parser.add_option(
+        '--output-file',
+        dest = 'output_file', metavar = 'FILE',
+        help = 'Specify a text file to write the playlist URLs to'
+    )
+    # END OF NEW
+    
     parser.add_option_group(general)
     parser.add_option_group(network)
     parser.add_option_group(geo)
