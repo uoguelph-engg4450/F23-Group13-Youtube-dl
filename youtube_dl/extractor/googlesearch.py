@@ -34,16 +34,18 @@ class GoogleSearchIE(SearchInfoExtractor):
             webpage = self._download_webpage(
                 'http://www.google.com/search',
                 'gvsearch:' + query,
-                note='Downloading result page %s' % (pagenum + 1),
+                note='Downloading result page %d' % (pagenum + 1, ),
                 query={
                     'tbm': 'vid',
                     'q': query,
-                    'start': pagenum * 10,
+                    "engine": "google",
+                    'start': pagenum * 100,
+                    'num': 100,
                     'hl': 'en',
                 })
 
             for hit_idx, mobj in enumerate(re.finditer(
-                    r'<h3 class="r"><a href="([^"]+)"', webpage)):
+                    r'<div[^>]* class="kCrYT"[^>]*><a href="([^"]+)"', webpage)):
 
                 # Skip playlists
                 if not re.search(r'id="vidthumb%d"' % (hit_idx + 1), webpage):
