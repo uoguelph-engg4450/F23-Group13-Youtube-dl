@@ -120,7 +120,12 @@ class CrunchyrollBaseIE(InfoExtractor):
 
 class CrunchyrollIE(CrunchyrollBaseIE, VRVIE):
     IE_NAME = 'crunchyroll'
-    _VALID_URL = r'https?://(?:(?P<prefix>www|m)\.)?(?P<url>crunchyroll\.(?:com|fr)/(?:media(?:-|/\?id=)|(?:[^/]*/){1,2}[^/?&]*?)(?P<video_id>[0-9]+))(?:[/?&]|$)'
+    #_VALID_URL = r'https?://(?:(?P<prefix>www|m)\.)?(?P<url>crunchyroll\.(?:com|fr)/(?:media(?:-|/\?id=)|(?:[^/]*/){1,2}[^/?&]*?)(?P<video_id>[0-9]+))(?:[/?&]|$)'
+    #_VALID_URL = r'https?://(?:(?P<prefix>www|m)\.)?(?P<url>crunchyroll\.(?:com|fr)/watch/(?P<video_id>[0-9]+/(?:[^/]*/){1,2}[^/?&]))'
+    #_VALID_URL =  r'https?://(?:(?P<prefix>www|m)\.)?(?P<url>crunchyroll\.(?:com|fr))/watch/GRVNE7XWY/the-morning-of-our-promise-is-still-distant'
+    #_VALID_URL =  r'https?://(?:(?P<prefix>www|m)\.)?(?P<url>crunchyroll\.(?:com|fr))/watch/GRVNE7XWY/(?P<video_id>[0-9]+)'
+
+    _VALID_URL =  r'https?://(?:(?P<prefix>www|m)\.)?(?P<url>crunchyroll\.(?:com|fr))/(?:(?P<lang>\w{2}(?:-\w{2})?)/)?watch/(?P<id>\w+)'
     _TESTS = [{
         'url': 'http://www.crunchyroll.com/wanna-be-the-strongest-in-the-world/episode-1-an-idol-wrestler-is-born-645513',
         'info_dict': {
@@ -155,6 +160,9 @@ class CrunchyrollIE(CrunchyrollBaseIE, VRVIE):
         },
         'skip': 'Video gone',
     }, {
+                #this is the old url format this is the new formatting https://www.crunchyroll.com/watch/GRVNE7XWY/the-morning-of-our-promise-is-still-distant
+                #id: GRVNE7XWY
+                #
         'url': 'http://www.crunchyroll.com/rezero-starting-life-in-another-world-/episode-5-the-morning-of-our-promise-is-still-distant-702409',
         'info_dict': {
             'id': '702409',
