@@ -867,14 +867,14 @@ def parseOpts(overrideArguments=None):
         metavar='FORMAT', dest='convertsubtitles', default=None,
         help='Convert the subtitles to other format (currently supported: srt|ass|vtt|lrc)')
 
-    # (NEW) WILL SOLVE ISSUE #2018
+    # (NEW) WILL SOLVE ISSUE #2018 (https://github.com/ytdl-org/youtube-dl/issues/2018)
     # General option to export a text file when given a new youtube playlist
     
     # Adding a new option to export a new textfile containing the URL of the playlist itself (This is technically an additional feature for the request)
     
     parser.add_option(
-        '--output-file',
-        dest = 'output_file', metavar = 'FILE',
+        '--output-text-file',
+        dest = 'output_text_file', metavar = 'FILE',
         help = 'Specify a text file to write the playlist URLs to'
     )
     # END OF NEW
@@ -933,4 +933,19 @@ def parseOpts(overrideArguments=None):
                     ('Command-line args', command_line_conf)):
                 write_string('[debug] %s: %s\n' % (conf_label, repr(_hide_login_info(conf))))
 
+    # (NEW) (Solving: https://github.com/ytdl-org/youtube-dl/issues/2018) Actually Check if it was adder
+    # Check if the --output--text-file option is provided
+    if opts.output_text_file:
+        with open(opts.output_text_file, 'w', encoding='utf-8') as output_text_file:
+            output_text_file.write("PlayList URL:\n")
+            for url in args:
+                output_text_file.write(url + '\n')
+        print(f'Playlist URL has been written to {opts.output_text_file}')
+    
+    
+    global output_file_name
+    output_file_name = opts.output_text_file
+    
+    # END OF NEW
+    
     return parser, opts, args
