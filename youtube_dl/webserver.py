@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, render_template
 import os
 
 # Intiialze Flask object will be used late to run the webserver this object is used by flask to run the webserver.
@@ -22,3 +22,8 @@ def homepage():
     # Encoding the video filenames this step is crucial to confirming data integrity. Essentially if this fails the data will not be posted on the webserver and the user knows that they will have a missing video
     
     encode_vids = [url_for('video', filename = video) for video in video_data_list]    
+
+    # This will render the new homepage for the app.
+    
+    return render_template('homepage.html', videos_to_display = zip(video_data_list, encode_vids))
+
