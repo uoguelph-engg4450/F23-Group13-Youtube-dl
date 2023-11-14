@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for
 import os
 
 # Intiialze Flask object will be used late to run the webserver this object is used by flask to run the webserver.
@@ -19,4 +19,6 @@ def homepage():
      
     video_data_list = [video for video in os.listdir(directory_of_script) if video.endswith(('.mp4', '.webm', '.mkv'))]
 
+    # Encoding the video filenames this step is crucial to confirming data integrity. Essentially if this fails the data will not be posted on the webserver and the user knows that they will have a missing video
     
+    encode_vids = [url_for('video', filename = video) for video in video_data_list]    
