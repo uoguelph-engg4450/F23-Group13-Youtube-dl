@@ -9,7 +9,7 @@ import io
 import os
 import random
 import sys
-
+from webserver import app           # (NEW) Import the app object of flask class to run the program at the end of all ooperations in YoutubeDL.
 
 from .options import (
     parseOpts,
@@ -477,6 +477,12 @@ def main(argv=None):
         sys.exit('ERROR: fixed output name but more than one file to download')
     except KeyboardInterrupt:
         sys.exit('\nERROR: Interrupted by user')
+    finally:
+        print("\nClick http://127.0.0.1:5000 to view all videos in the file system.\n Once done come back to the terminal and press CTRL + C to quit the program.\n")
+        app.run(debug=False)
+        ''' 
+        (NEW) This finally block was added to the Try-execpt block of code as once the program runs the real main code to extract the 
+        videos reagardless of weather or not there was any exception it will run the webserver to show what was downloaded on the FE.
 
-
+        '''
 __all__ = ['main', 'YoutubeDL', 'gen_extractors', 'list_extractors']
