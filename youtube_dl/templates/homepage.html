@@ -16,8 +16,21 @@
         <h3> The following videos were installed thorugh the Youtube DL command line tool displayed here for ease of access and debugging purposes. </h3>
 
         <div>
-        
+            {% if videos_to_display%}
+                <ul>
+                    {% for video, encode_vids in videos_to_display %}
+                        <li>
+                            <video controls>
+                                <source src = "{{ encode_vids }}" type = "video/mp4">
+                                Your browser does not support support the video tag.
+                            </video>
+                            <p>{{ video }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class = "no-videos"> No videos found in directory.</p>
+            {% endif %}
         </div>
-
     </body>
 </html>
