@@ -43,7 +43,7 @@ from .downloader import (
 from .extractor import gen_extractors, list_extractors
 from .extractor.adobepass import MSO_INFO
 from .YoutubeDL import YoutubeDL
-
+from .gui import test
 
 def _real_main(argv=None):
     # Compatibility fix for Windows
@@ -52,7 +52,7 @@ def _real_main(argv=None):
     workaround_optparse_bug9161()
 
     setproctitle('youtube-dl')
-
+    
     parser, opts, args = parseOpts(argv)
 
     # Set user agent
