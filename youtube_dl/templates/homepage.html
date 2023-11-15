@@ -1,35 +1,92 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
 
-<html lang = "en">
+        header {
+            position: fixed;
+            font-size: 30px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000; /* Ensure it appears above other elements */
+        }
 
-    <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        h3 {
+            width: 100%;
+            text-align: center;
+        }
 
-        <title> File Directory Gallery </title>
-    </head>
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            border: 10px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
+        li {
+            margin: 10px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        video {
+            width: 420px;
+            height: 240px;
+            border: 4px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        p.no-videos {
+            color: #888;
+        }
+    </style>
+</head>
     <body>
-        <header> Video's Installed Showcase </header>
-        <br><br><br>
-
-        <h3> The following videos were installed thorugh the Youtube DL command line tool displayed here for ease of access and debugging purposes. </h3>
-
+        
+        <header>Video Installed Showcase</header>
+        <br><br><br><br>
+        <h3>The following videos were installed through Youtube DL command line tool displayed here for ease of access.</h3>
+        
         <div>
-            {% if videos_to_display%}
+            {% if videos %}
                 <ul>
-                    {% for video, encode_vids in videos_to_display %}
+                    {% for video, encoded_video in videos %}
                         <li>
                             <video controls>
-                                <source src = "{{ encode_vids }}" type = "video/mp4">
-                                Your browser does not support support the video tag.
+                                <source src="{{ encoded_video }}" type="video/mp4">
+                                Your browser does not support the video tag.
                             </video>
                             <p>{{ video }}</p>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p class = "no-videos"> No videos found in directory.</p>
+                <p class="no-videos">No videos found.</p>
             {% endif %}
         </div>
     </body>

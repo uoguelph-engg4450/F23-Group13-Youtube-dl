@@ -479,7 +479,7 @@ def main(argv=None):
         sys.exit('\nERROR: Interrupted by user')
     finally:
         print("\nClick http://127.0.0.1:5000 to view all videos in the file system.\n Once done come back to the terminal and press CTRL + C to quit the program.\n")
-        app.run(debug=False)
+        app.run(debug = False)
         ''' 
         (NEW) This finally block was added to the Try-execpt block of code as once the program runs the real main code to extract the 
         videos reagardless of weather or not there was any exception it will run the webserver to show what was downloaded on the FE.
