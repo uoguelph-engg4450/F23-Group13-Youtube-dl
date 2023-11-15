@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, send_from_directory
 import os
 
 # Intiialze Flask object will be used late to run the webserver this object is used by flask to run the webserver.
@@ -27,3 +27,11 @@ def homepage():
     
     return render_template('homepage.html', videos_to_display = zip(video_data_list, encode_vids))
 
+# Collect the route to each video also each video is stored in the same directory so send each video from there.
+@app.route('/video/<filename>')
+
+def video(filename):
+    return send_from_directory(directory_of_script, filename)
+
+if __name__ == '__main__':
+    app.run(debug = True)
