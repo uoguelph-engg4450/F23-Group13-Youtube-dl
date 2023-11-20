@@ -17,7 +17,7 @@ def homepage():
     directory_video_stored = script_dir
     # Collect all the videos into a list from the same file direcotry after the program downloads each of them.
      
-    videos = [video for video in os.listdir(directory_video_stored) if video.endswith(('.mp4', '.webm', '.mkv'))]
+    videos = [video for video in os.listdir(directory_video_stored) if video.endswith(('.mp4', '.webm', '.best'))]
 
     # Encoding the video filenames this step is crucial to confirming data integrity. Essentially if this fails the data will not be posted on the webserver and the user knows that they will have a missing video
     
