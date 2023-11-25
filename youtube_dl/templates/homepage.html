@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Gallery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            font-size: 30px;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensure it appears above other elements */
+        }
+
+        h3 {
+            width: 100%;
+            text-align: center;
+        }
+
+        ul {
+            justify-content: space-around;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            border: 10px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            list-style: none;
+        }
+
+        li {
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            text-align: center;
+            padding: 10px;
+            
+        }
+
+        video {
+            width: 420px;
+            height: 240px;
+            border: 4px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        p.no-videos {
+            color: #888;
+        }
+    </style>
+</head>
+    <body>
+        
+        <header>Video Installed Showcase</header>
+        <br><br><br><br>
+        <h3>The following videos were installed through Youtube DL command line tool displayed here for ease of access.</h3>
+        
+        <div>
+            {% if videos %}
+                <ul>
+                    {% for video, encoded_video in videos %}
+                        <li>
+                            <video controls>
+                                <source src="{{ encoded_video }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p>{{ video }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-videos">No videos found.</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
